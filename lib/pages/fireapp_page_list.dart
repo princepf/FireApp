@@ -1,20 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Fireapp_Page_List extends StatelessWidget {
-  const Fireapp_Page_List({Key? key}) : super(key: key);
+class Fireapp_Page_List extends StatefulWidget {
+  Fireapp_Page_List({Key? key}) : super(key: key);
+
+  @override
+  _Fireapp_Page_ListState createState() => _Fireapp_Page_ListState();
+}
+
+class _Fireapp_Page_ListState extends State<Fireapp_Page_List> {
+  CollectionReference tasksTable =
+      FirebaseFirestore.instance.collection('tasks');
+  List<TaskModel> list = [];
+  String fn = '';
+  String ln = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("FireApp")),
+        title: Text("FireApp"),
+        centerTitle: true,
       ),
       body: FutureBuilder<List<TaskModel>>(
           future: getData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              List<TaskModel> list = [];
               if (snapshot.hasData) {
                 list = snapshot.data!;
                 return ListView.builder(
@@ -22,37 +33,61 @@ class Fireapp_Page_List extends StatelessWidget {
                     itemBuilder: (context, index) => Column(
                           children: [
                             ListTile(
-                              title: Text("${list[index].username}"),
+                              title: Text(
+                                  "${list[index].fname}  ${list[index].lname}"),
+                              onTap: () {},
+                              trailing: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    tasksTable
+                                        .doc('${list[index].id}')
+                                        .delete();
+                                  });
+                                },
+                                child: Icon(Icons.delete),
+                              ),
                             ),
-                            ListTile(
-                              title: Text("${list[index].email}"),
-                            ),
-                            ListTile(
-                              title: Text("${list[index].password}"),
-                            )
                           ],
                         ));
               }
             }
+
             return Center(child: CircularProgressIndicator());
           }),
       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
         onPressed: () {
           showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                    title: Text(""),
+                    title: Text("User data"),
+                    backgroundColor: Colors.blue[50],
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    actions: [
+                      TextField(
+                        decoration: InputDecoration(hintText: "fname"),
+                        onChanged: (v) => fn = v,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(hintText: "lname"),
+                        onChanged: (v) => ln = v,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            addTask();
+                          },
+                          child: Text("submit"))
+                    ],
                   ));
         },
-        child: Icon(Icons.add),
       ),
     );
   }
 
   Future<List<TaskModel>> getData() async {
     List<TaskModel> taskList = [];
-    CollectionReference tasksTable =
-        FirebaseFirestore.instance.collection('tasks');
+
     var tableData = await tasksTable.get();
 
     if (tableData.docs.isNotEmpty) {
@@ -60,26 +95,38 @@ class Fireapp_Page_List extends StatelessWidget {
         var json = element.data() as Map;
         taskList.add(TaskModel(
           id: element.id,
-          username: json["username"],
-          email: json["email"],
-          password: json["password"],
+          fname: json["fname"],
+          lname: json["lname"],
         ));
       });
     }
     return taskList;
   }
+
+  void addTask() async {
+    CollectionReference tasksTable =
+        FirebaseFirestore.instance.collection('tasks');
+    await tasksTable.doc().set({
+      "fname": fn,
+      "lname": ln,
+    });
+    fn = '';
+    ln = '';
+    Navigator.pop(context);
+    setState(() {
+      getData();
+    });
+  }
 }
 
 class TaskModel {
   final String? id;
-  final String? username;
-  final String? email;
-  final String? password;
+  final String? fname;
+  final String? lname;
 
   TaskModel({
     this.id,
-    this.username,
-    this.email,
-    this.password,
+    this.fname,
+    this.lname,
   });
 }
