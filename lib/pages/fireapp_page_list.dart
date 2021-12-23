@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Fireapp_Page_List extends StatefulWidget {
-  Fireapp_Page_List({Key? key}) : super(key: key);
+class FireappPageList extends StatefulWidget {
+  FireappPageList({Key? key}) : super(key: key);
 
   @override
-  _Fireapp_Page_ListState createState() => _Fireapp_Page_ListState();
+  _FireappPageListState createState() => _FireappPageListState();
 }
 
-class _Fireapp_Page_ListState extends State<Fireapp_Page_List> {
+class _FireappPageListState extends State<FireappPageList> {
   CollectionReference tasksTable =
       FirebaseFirestore.instance.collection('tasks');
   List<TaskModel> list = [];
@@ -33,6 +33,16 @@ class _Fireapp_Page_ListState extends State<Fireapp_Page_List> {
                     itemBuilder: (context, index) => Column(
                           children: [
                             ListTile(
+                              onLongPress: () {
+                                setState(() async {
+                                  await tasksTable
+                                      .doc('${list[index].id}')
+                                      .update({
+                                    'fname': fn,
+                                    'lname': ln,
+                                  });
+                                });
+                              },
                               title: Text(
                                   "${list[index].fname}  ${list[index].lname}"),
                               onTap: () {},
@@ -51,7 +61,6 @@ class _Fireapp_Page_ListState extends State<Fireapp_Page_List> {
                         ));
               }
             }
-
             return Center(child: CircularProgressIndicator());
           }),
       floatingActionButton: FloatingActionButton(
@@ -113,9 +122,7 @@ class _Fireapp_Page_ListState extends State<Fireapp_Page_List> {
     fn = '';
     ln = '';
     Navigator.pop(context);
-    setState(() {
-      getData();
-    });
+    setState(() {});
   }
 }
 
