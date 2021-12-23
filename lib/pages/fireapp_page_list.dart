@@ -34,11 +34,36 @@ class _FireappPageListState extends State<FireappPageList> {
                           children: [
                             ListTile(
                               onLongPress: () {
-                                setState(() async {
-                                  await tasksTable
-                                      .doc('${list[index].id}')
-                                      .update({});
-                                });
+                                fn = list[index].fname!;
+                                ln = list[index].lname!;
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                          title: Text("Update data"),
+                                          backgroundColor: Colors.blue[50],
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          actions: [
+                                            TextFormField(
+                                              initialValue: list[index].fname,
+                                              decoration: InputDecoration(
+                                                  hintText: "fname"),
+                                              onChanged: (v) => fn = v,
+                                            ),
+                                            TextFormField(
+                                              initialValue: list[index].lname,
+                                              decoration: InputDecoration(
+                                                  hintText: "lname"),
+                                              onChanged: (v) => ln = v,
+                                            ),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  updateTask(list[index].id);
+                                                },
+                                                child: Text("submit")),
+                                          ],
+                                        ));
                               },
                               title: Text(
                                   "${list[index].fname}  ${list[index].lname}"),
@@ -113,6 +138,19 @@ class _FireappPageListState extends State<FireappPageList> {
     CollectionReference tasksTable =
         FirebaseFirestore.instance.collection('tasks');
     await tasksTable.doc().set({
+      "fname": fn,
+      "lname": ln,
+    });
+    fn = '';
+    ln = '';
+    Navigator.pop(context);
+    setState(() {});
+  }
+
+  void updateTask(String? id) async {
+    CollectionReference tasksTable =
+        FirebaseFirestore.instance.collection('tasks');
+    await tasksTable.doc(id).set({
       "fname": fn,
       "lname": ln,
     });
