@@ -37,10 +37,7 @@ class _FireappPageListState extends State<FireappPageList> {
                                 setState(() async {
                                   await tasksTable
                                       .doc('${list[index].id}')
-                                      .update({
-                                    'fname': fn,
-                                    'lname': ln,
-                                  });
+                                      .update({});
                                 });
                               },
                               title: Text(
@@ -82,11 +79,11 @@ class _FireappPageListState extends State<FireappPageList> {
                         decoration: InputDecoration(hintText: "lname"),
                         onChanged: (v) => ln = v,
                       ),
-                      TextButton(
+                      ElevatedButton(
                           onPressed: () {
                             addTask();
                           },
-                          child: Text("submit"))
+                          child: Text("submit")),
                     ],
                   ));
         },
