@@ -19,7 +19,7 @@ class _FireappPageListState extends State<FireappPageList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("FireApp"),
+        title: Text("Friend List"),
         centerTitle: true,
       ),
       body: FutureBuilder<List<TaskModel>>(
@@ -30,49 +30,61 @@ class _FireappPageListState extends State<FireappPageList> {
                 list = snapshot.data!;
                 return ListView.builder(
                     itemCount: list.length,
-                    itemBuilder: (context, index) => ListTile(
-                          onLongPress: () {
-                            fn = list[index].fname!;
-                            ln = list[index].lname!;
-                            showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                      title: Text("Update data"),
-                                      backgroundColor: Colors.blue[50],
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      actions: [
-                                        TextFormField(
-                                          initialValue: list[index].fname,
-                                          decoration: InputDecoration(
-                                              hintText: "fname"),
-                                          onChanged: (v) => fn = v,
-                                        ),
-                                        TextFormField(
-                                          initialValue: list[index].lname,
-                                          decoration: InputDecoration(
-                                              hintText: "lname"),
-                                          onChanged: (v) => ln = v,
-                                        ),
-                                        ElevatedButton(
-                                            onPressed: () {
-                                              updateTask(list[index].id);
-                                            },
-                                            child: Text("submit")),
-                                      ],
-                                    ));
-                          },
-                          title: Text(
-                              "${list[index].fname}  ${list[index].lname}"),
-                          onTap: () {},
-                          trailing: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                tasksTable.doc('${list[index].id}').delete();
-                              });
+                    itemBuilder: (context, index) => Container(
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(
+                                  color: Colors.amber.withOpacity(0.7))),
+                          child: ListTile(
+                            onLongPress: () {
+                              fn = list[index].fname!;
+                              ln = list[index].lname!;
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: Text("Update data"),
+                                        backgroundColor: Colors.amber[50],
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        actions: [
+                                          TextFormField(
+                                            initialValue: list[index].fname,
+                                            decoration: InputDecoration(
+                                                hintText: "fname"),
+                                            onChanged: (v) => fn = v,
+                                          ),
+                                          TextFormField(
+                                            initialValue: list[index].lname,
+                                            decoration: InputDecoration(
+                                                hintText: "lname"),
+                                            onChanged: (v) => ln = v,
+                                          ),
+                                          ElevatedButton(
+                                              onPressed: () {
+                                                updateTask(list[index].id);
+                                              },
+                                              child: Text("Update")),
+                                        ],
+                                      ));
                             },
-                            child: Icon(Icons.delete),
+                            title: Container(
+                              child: Text(
+                                  "${list[index].fname}  ${list[index].lname}"),
+                            ),
+                            onTap: () {},
+                            trailing: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  tasksTable.doc('${list[index].id}').delete();
+                                });
+                              },
+                              child: Icon(
+                                Icons.delete,
+                                color: Colors.amber[400],
+                              ),
+                            ),
                           ),
                         ));
               }
@@ -85,8 +97,8 @@ class _FireappPageListState extends State<FireappPageList> {
           showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                    title: Text("User data"),
-                    backgroundColor: Colors.blue[50],
+                    title: Text("Friend data"),
+                    backgroundColor: Colors.amber[50],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     actions: [
@@ -102,7 +114,7 @@ class _FireappPageListState extends State<FireappPageList> {
                           onPressed: () {
                             addTask();
                           },
-                          child: Text("submit")),
+                          child: Text("Add")),
                     ],
                   ));
         },
