@@ -31,7 +31,8 @@ class _FireappPageListState extends State<FireappPageList> {
                 return ListView.builder(
                     itemCount: list.length,
                     itemBuilder: (context, index) => Container(
-                          margin: EdgeInsets.all(10),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 10),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
                               border: Border.all(
@@ -43,7 +44,12 @@ class _FireappPageListState extends State<FireappPageList> {
                               showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                        title: Text("Update data"),
+                                        title: Text(
+                                          "Update data",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                         backgroundColor: Colors.amber[50],
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -61,11 +67,28 @@ class _FireappPageListState extends State<FireappPageList> {
                                                 hintText: "lname"),
                                             onChanged: (v) => ln = v,
                                           ),
-                                          ElevatedButton(
-                                              onPressed: () {
+                                          InkWell(
+                                              onTap: () {
                                                 updateTask(list[index].id);
                                               },
-                                              child: Text("Update")),
+                                              child: Container(
+                                                  margin: EdgeInsets.all(20),
+                                                  alignment: Alignment.center,
+                                                  height: 40,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30),
+                                                      color: Colors.amber),
+                                                  child: Text(
+                                                    "Update",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ))),
                                         ],
                                       ));
                             },
@@ -97,7 +120,11 @@ class _FireappPageListState extends State<FireappPageList> {
           showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                    title: Text("Friend data"),
+                    title: Text(
+                      "Friend data",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                     backgroundColor: Colors.amber[50],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
@@ -110,11 +137,23 @@ class _FireappPageListState extends State<FireappPageList> {
                         decoration: InputDecoration(hintText: "lname"),
                         onChanged: (v) => ln = v,
                       ),
-                      ElevatedButton(
-                          onPressed: () {
-                            addTask();
-                          },
-                          child: Text("Add")),
+                      InkWell(
+                          onTap: () {},
+                          child: Container(
+                              margin: EdgeInsets.all(20),
+                              alignment: Alignment.center,
+                              height: 40,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.amber),
+                              child: Text(
+                                "Add",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ))),
                     ],
                   ));
         },
