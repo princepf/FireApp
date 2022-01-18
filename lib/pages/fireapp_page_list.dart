@@ -30,56 +30,50 @@ class _FireappPageListState extends State<FireappPageList> {
                 list = snapshot.data!;
                 return ListView.builder(
                     itemCount: list.length,
-                    itemBuilder: (context, index) => Column(
-                          children: [
-                            ListTile(
-                              onLongPress: () {
-                                fn = list[index].fname!;
-                                ln = list[index].lname!;
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                          title: Text("Update data"),
-                                          backgroundColor: Colors.blue[50],
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          actions: [
-                                            TextFormField(
-                                              initialValue: list[index].fname,
-                                              decoration: InputDecoration(
-                                                  hintText: "fname"),
-                                              onChanged: (v) => fn = v,
-                                            ),
-                                            TextFormField(
-                                              initialValue: list[index].lname,
-                                              decoration: InputDecoration(
-                                                  hintText: "lname"),
-                                              onChanged: (v) => ln = v,
-                                            ),
-                                            ElevatedButton(
-                                                onPressed: () {
-                                                  updateTask(list[index].id);
-                                                },
-                                                child: Text("submit")),
-                                          ],
-                                        ));
-                              },
-                              title: Text(
-                                  "${list[index].fname}  ${list[index].lname}"),
-                              onTap: () {},
-                              trailing: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    tasksTable
-                                        .doc('${list[index].id}')
-                                        .delete();
-                                  });
-                                },
-                                child: Icon(Icons.delete),
-                              ),
-                            ),
-                          ],
+                    itemBuilder: (context, index) => ListTile(
+                          onLongPress: () {
+                            fn = list[index].fname!;
+                            ln = list[index].lname!;
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title: Text("Update data"),
+                                      backgroundColor: Colors.blue[50],
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      actions: [
+                                        TextFormField(
+                                          initialValue: list[index].fname,
+                                          decoration: InputDecoration(
+                                              hintText: "fname"),
+                                          onChanged: (v) => fn = v,
+                                        ),
+                                        TextFormField(
+                                          initialValue: list[index].lname,
+                                          decoration: InputDecoration(
+                                              hintText: "lname"),
+                                          onChanged: (v) => ln = v,
+                                        ),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              updateTask(list[index].id);
+                                            },
+                                            child: Text("submit")),
+                                      ],
+                                    ));
+                          },
+                          title: Text(
+                              "${list[index].fname}  ${list[index].lname}"),
+                          onTap: () {},
+                          trailing: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                tasksTable.doc('${list[index].id}').delete();
+                              });
+                            },
+                            child: Icon(Icons.delete),
+                          ),
                         ));
               }
             }
