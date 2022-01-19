@@ -50,22 +50,70 @@ class _FireappPageListState extends State<FireappPageList> {
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        backgroundColor: Colors.amber[50],
+                                        backgroundColor: Colors.white,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20)),
                                         actions: [
-                                          TextFormField(
-                                            initialValue: list[index].fname,
-                                            decoration: InputDecoration(
-                                                hintText: "fname"),
-                                            onChanged: (v) => fn = v,
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                border: Border.all(
+                                                    color: Colors.amber
+                                                        .withOpacity(0.7),
+                                                    width: 1.5)),
+                                            height: 50,
+                                            width: double.infinity,
+                                            child: TextFormField(
+                                              initialValue: list[index].fname,
+                                              decoration: InputDecoration(
+                                                  icon: Icon(Icons
+                                                      .person_pin_circle_rounded),
+                                                  fillColor: Colors.amber,
+                                                  border: InputBorder.none,
+                                                  focusedBorder:
+                                                      InputBorder.none,
+                                                  hintText: "fname",
+                                                  hintStyle: TextStyle(
+                                                      color: Colors.amber)),
+                                              onChanged: (v) => fn = v,
+                                            ),
                                           ),
-                                          TextFormField(
-                                            initialValue: list[index].lname,
-                                            decoration: InputDecoration(
-                                                hintText: "lname"),
-                                            onChanged: (v) => ln = v,
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                border: Border.all(
+                                                    color: Colors.amber
+                                                        .withOpacity(0.7),
+                                                    width: 1.5)),
+                                            height: 50,
+                                            width: double.infinity,
+                                            child: TextFormField(
+                                              initialValue: list[index].lname,
+                                              decoration: InputDecoration(
+                                                  icon: Icon(Icons
+                                                      .person_pin_circle_outlined),
+                                                  fillColor: Colors.amber,
+                                                  border: InputBorder.none,
+                                                  focusedBorder:
+                                                      InputBorder.none,
+                                                  hintText: "lname",
+                                                  hintStyle: TextStyle(
+                                                      color: Colors.amber)),
+                                              onChanged: (v) => ln = v,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 20,
                                           ),
                                           InkWell(
                                               onTap: () {
@@ -77,10 +125,24 @@ class _FireappPageListState extends State<FireappPageList> {
                                                   height: 40,
                                                   width: double.infinity,
                                                   decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30),
-                                                      color: Colors.amber),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    color: Colors.amber,
+                                                    boxShadow: const [
+                                                      BoxShadow(
+                                                          color: Colors.grey,
+                                                          blurRadius: 15,
+                                                          offset: Offset(4, 4),
+                                                          spreadRadius: 1),
+                                                      BoxShadow(
+                                                          color: Colors.white12,
+                                                          blurRadius: 15,
+                                                          offset:
+                                                              Offset(-4, -4),
+                                                          spreadRadius: 1)
+                                                    ],
+                                                  ),
                                                   child: Text(
                                                     "Update",
                                                     style: TextStyle(
@@ -115,7 +177,10 @@ class _FireappPageListState extends State<FireappPageList> {
             return Center(child: CircularProgressIndicator());
           }),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
         onPressed: () {
           showDialog(
               context: context,
@@ -125,17 +190,55 @@ class _FireappPageListState extends State<FireappPageList> {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    backgroundColor: Colors.amber[50],
+                    backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     actions: [
-                      TextField(
-                        decoration: InputDecoration(hintText: "fname"),
-                        onChanged: (v) => fn = v,
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(
+                                color: Colors.amber.withOpacity(0.7),
+                                width: 1.5)),
+                        height: 50,
+                        width: double.infinity,
+                        child: TextField(
+                          decoration: InputDecoration(
+                              icon: Icon(Icons.person_pin_circle_rounded),
+                              fillColor: Colors.amber,
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              hintText: "fname",
+                              hintStyle: TextStyle(color: Colors.amber)),
+                          onChanged: (v) => fn = v,
+                        ),
                       ),
-                      TextField(
-                        decoration: InputDecoration(hintText: "lname"),
-                        onChanged: (v) => ln = v,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(
+                                color: Colors.amber.withOpacity(0.7),
+                                width: 1.5)),
+                        height: 50,
+                        width: double.infinity,
+                        child: TextField(
+                          decoration: InputDecoration(
+                              icon: Icon(Icons.person_pin_circle_outlined),
+                              fillColor: Colors.amber,
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              hintText: "lname",
+                              hintStyle: TextStyle(color: Colors.amber)),
+                          onChanged: (v) => ln = v,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
                       ),
                       InkWell(
                           onTap: () {},
@@ -145,8 +248,21 @@ class _FireappPageListState extends State<FireappPageList> {
                               height: 40,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.amber),
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.amber,
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.grey,
+                                      blurRadius: 15,
+                                      offset: Offset(4, 4),
+                                      spreadRadius: 1),
+                                  BoxShadow(
+                                      color: Colors.white12,
+                                      blurRadius: 15,
+                                      offset: Offset(-4, -4),
+                                      spreadRadius: 1)
+                                ],
+                              ),
                               child: Text(
                                 "Add",
                                 style: TextStyle(
