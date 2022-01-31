@@ -1,6 +1,8 @@
+import 'package:fireapp/pages/fireapp_page_list.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'pages/fireapp_page_list.dart';
+
+import 'pages/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

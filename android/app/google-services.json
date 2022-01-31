@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "240972478728",
-    "project_id": "fireapp-9714f",
-    "storage_bucket": "fireapp-9714f.appspot.com"
+    "project_number": "1060348141337",
+    "project_id": "fireapp-f4871",
+    "storage_bucket": "fireapp-f4871.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:240972478728:android:9cec100bded0ea70d994bd",
+        "mobilesdk_app_id": "1:1060348141337:android:e66cc0233a4d45741d6f88",
         "android_client_info": {
-          "package_name": "com.fireapp.firebaseapp"
+          "package_name": "com.firebaseapp.fireapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "240972478728-vpgc1pa3r0fkqtiuich83rge09ep38tm.apps.googleusercontent.com",
+          "client_id": "1060348141337-jt25th4ge81vj0si0qe2v13tk8dfdlue.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCbbbVqHzY3igpjVeVM9QGNmALtcH_zgKo"
+          "current_key": "AIzaSyAhJRtO2QPzK9Gylcohyw-boG6vpkoLWHI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "240972478728-vpgc1pa3r0fkqtiuich83rge09ep38tm.apps.googleusercontent.com",
+              "client_id": "1060348141337-jt25th4ge81vj0si0qe2v13tk8dfdlue.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "240972478728-fpe06d5ucadik5muee5rue5202nqst1q.apps.googleusercontent.com",
+              "client_id": "1060348141337-qe9o4d1ko4pbbvk2p3hpdkka8chfjj3r.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.fireapp.firebaseapp"
+                "bundle_id": "com.firebaseapp.fireapp"
               }
             }
           ]
