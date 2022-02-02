@@ -241,7 +241,9 @@ class _FireappPageListState extends State<FireappPageList> {
                         height: 20,
                       ),
                       InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            addTask();
+                          },
                           child: Container(
                               margin: EdgeInsets.all(20),
                               alignment: Alignment.center,
